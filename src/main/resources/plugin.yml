@@ -1,0 +1,4 @@
+name: Tag
+version: '${project.version}'
+main: org.gomadango0113.tag.TagPlugin
+api-version: '1.20'
