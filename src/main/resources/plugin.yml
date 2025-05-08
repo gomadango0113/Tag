@@ -2,3 +2,8 @@ name: Tag
 version: '${project.version}'
 main: org.gomadango0113.tag.TagPlugin
 api-version: '1.20'
+
+commands:
+  tag_start:
+    description: ゲームを開始するコマンド
+    permission: gomadango0113.tag.game_start
