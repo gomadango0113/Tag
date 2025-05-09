@@ -2,6 +2,7 @@ package org.gomadango0113.tag;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.gomadango0113.tag.command.EventCommand;
 import org.gomadango0113.tag.command.GameStartCommand;
 import org.gomadango0113.tag.manager.ScoreboardManager;
 
@@ -23,6 +24,7 @@ public final class TagPlugin extends JavaPlugin {
 
     private void registerCommand() {
         getCommand("tag_start").setExecutor(new GameStartCommand());
+        getCommand("tag_event").setExecutor(new EventCommand());
     }
 
     private void registerListener() {

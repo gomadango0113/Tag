@@ -7,3 +7,6 @@ commands:
   tag_start:
     description: ゲームを開始するコマンド
     permission: gomadango0113.tag.game_start
+  tag_event:
+    description: イベントに関するコマンド
+    permission: gomadango0113.tag.game_event
