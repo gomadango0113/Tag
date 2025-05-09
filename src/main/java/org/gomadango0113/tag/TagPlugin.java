@@ -3,6 +3,7 @@ package org.gomadango0113.tag;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.gomadango0113.tag.command.GameStartCommand;
+import org.gomadango0113.tag.manager.ScoreboardManager;
 
 public final class TagPlugin extends JavaPlugin {
 
@@ -10,6 +11,7 @@ public final class TagPlugin extends JavaPlugin {
     public void onEnable() {
         registerCommand();
         registerListener();
+        ScoreboardManager.setScoreboard(0);
 
         getLogger().info("プラグインが有効になりました。");
     }

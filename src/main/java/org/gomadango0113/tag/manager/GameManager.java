@@ -26,6 +26,8 @@ public class GameManager {
                     if (status == GameStatus.WAITING || status == GameStatus.COUNTING) {
                         if (count_time[0] == 0) {
                             ChatUtil.sendGlobalMessage("ゲーム開始!!");
+                            ScoreboardManager.setScoreboard(1);
+                            TeamManager.randomTeam(false);
                             status = GameStatus.RUNNING;
                         }
                         else {
@@ -51,6 +53,18 @@ public class GameManager {
         }
 
         return 1;
+    }
+
+    public static GameStatus getStatus() {
+        return status;
+    }
+
+    public static int getTime() {
+        return GAME_TIME;
+    }
+
+    public static void setTime(int time) {
+        GAME_TIME = time;
     }
 
     public enum GameStatus {
