@@ -20,26 +20,30 @@ public class TeamManager {
     private static Map<GameTeam, Team> team_map = new HashMap<>();
     private static Team oni_team = board.getTeam("oni");
     private static Team run_team = board.getTeam("run");
+    private static Team prisoner_team = board.getTeam("prisoner");
 
     static {
         createTeam();
 
         team_map.put(GameTeam.ONI, oni_team);
         team_map.put(GameTeam.RUN, run_team);
+        team_map.put(GameTeam.PRISONER, prisoner_team);
     }
 
     public static void createTeam() {
         if (oni_team == null || run_team == null) {
             oni_team = board.registerNewTeam("oni");
             run_team = board.registerNewTeam("run");
+            prisoner_team = board.registerNewTeam("prisoner");
 
             NameTagVisibility hide_nametag = NameTagVisibility.HIDE_FOR_OTHER_TEAMS;
-            for (Team team : new Team[]{oni_team, run_team}) {
+            for (Team team : new Team[]{oni_team, run_team, prisoner_team}) {
                 team.setNameTagVisibility(hide_nametag);
             }
 
             oni_team.setPrefix(ChatColor.RED + "");
             run_team.setPrefix(ChatColor.AQUA + "");
+            prisoner_team.setPrefix(ChatColor.BLACK + "");
 
             Bukkit.getLogger().info("[Tag-TeamManager] チームを作成しました。");
         }
@@ -70,6 +74,9 @@ public class TeamManager {
         else if (getTeamOfflinePlayer(GameTeam.ONI).contains(player.getName())) {
             return GameTeam.ONI;
         }
+        else if (getTeamOfflinePlayer(GameTeam.PRISONER).contains(player.getName())) {
+            return GameTeam.PRISONER;
+        }
         else {
             return GameTeam.UNKNOWN;
         }
@@ -99,6 +106,7 @@ public class TeamManager {
     public enum GameTeam {
         ONI,
         RUN,
+        PRISONER,
         UNKNOWN
     }
 
