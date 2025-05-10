@@ -67,6 +67,10 @@ public class TeamManager {
         return online;
     }
 
+    public static Team getTeam(GameTeam team) {
+        return team_map.get(team);
+    }
+
     public static GameTeam getPlayerTeam(OfflinePlayer player) {
         if (getTeamOfflinePlayer(GameTeam.RUN).contains(player.getName())) {
             return GameTeam.RUN;
