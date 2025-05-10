@@ -63,6 +63,18 @@ public class TeamManager {
         return online;
     }
 
+    public static GameTeam getPlayerTeam(OfflinePlayer player) {
+        if (getTeamOfflinePlayer(GameTeam.RUN).contains(player.getName())) {
+            return GameTeam.RUN;
+        }
+        else if (getTeamOfflinePlayer(GameTeam.ONI).contains(player.getName())) {
+            return GameTeam.ONI;
+        }
+        else {
+            return GameTeam.UNKNOWN;
+        }
+    }
+
     public static void randomTeam(boolean rejoin) {
         if (oni_team != null && run_team != null) {
             List<Player> online_players = new ArrayList<>(Bukkit.getOnlinePlayers());
@@ -86,7 +98,8 @@ public class TeamManager {
 
     public enum GameTeam {
         ONI,
-        RUN
+        RUN,
+        UNKNOWN
     }
 
 }
