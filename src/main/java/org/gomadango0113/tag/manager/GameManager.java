@@ -27,6 +27,7 @@ public class GameManager {
                         if (count_time[0] == 0) {
                             ChatUtil.sendGlobalMessage("ゲーム開始!!");
                             ScoreboardManager.setScoreboard(1);
+                            MoneyManager.startMoneyAdd();
                             TeamManager.randomTeam(false);
                             status = GameStatus.RUNNING;
                         }
