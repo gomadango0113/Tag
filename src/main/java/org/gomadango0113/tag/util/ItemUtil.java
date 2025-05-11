@@ -1,6 +1,7 @@
 package org.gomadango0113.tag.util;
 
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -21,6 +22,12 @@ public class ItemUtil {
 
     public ItemUtil(ItemStack itemStack) {
         this.itemstack = itemStack;
+    }
+
+    public ItemUtil addEnc(Enchantment enc, int level) {
+        itemstack.addUnsafeEnchantment(enc, level);
+
+        return this;
     }
 
     public ItemStack getItemStack(String name, List<String> lore) {
