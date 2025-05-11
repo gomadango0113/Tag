@@ -9,6 +9,7 @@ import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.gomadango0113.tag.util.ChatUtil;
+import org.gomadango0113.tag.util.ItemUtil;
 
 import java.util.*;
 
@@ -99,6 +100,7 @@ public class TeamManager {
             int RANDOM_SIZE = (int) (online_players.size() * RANDOM_PERCENT);
             for (int n = 0; n < RANDOM_SIZE; n++) {
                 Player select_player = online_players.remove(0);
+                select_player.getInventory().setArmorContents(ItemManager.getTeamArmorArray(GameTeam.ONI));
                 ChatUtil.sendMessage(select_player, "あなたは鬼になりました。");
                 oni_team.addEntry(select_player.getName());
             }
