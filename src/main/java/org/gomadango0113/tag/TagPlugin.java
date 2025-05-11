@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.gomadango0113.tag.command.EventCommand;
 import org.gomadango0113.tag.command.GameStartCommand;
 import org.gomadango0113.tag.listener.PlayerDamageListener;
+import org.gomadango0113.tag.listener.PlayerInteractListener;
 import org.gomadango0113.tag.manager.ScoreboardManager;
 
 public final class TagPlugin extends JavaPlugin {
@@ -32,6 +33,7 @@ public final class TagPlugin extends JavaPlugin {
         PluginManager plm = getServer().getPluginManager();
 
         plm.registerEvents(new PlayerDamageListener(), this);
+        plm.registerEvents(new PlayerInteractListener(), this);
     }
 
     public static TagPlugin getInstance() {
