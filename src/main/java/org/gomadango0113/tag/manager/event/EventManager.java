@@ -1,4 +1,4 @@
-package org.gomadango0113.tag.manager;
+package org.gomadango0113.tag.manager.event;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,9 +23,25 @@ public class EventManager {
 
     private static final LinkedList<TagEvent> event_queue = new LinkedList<>();
 
+    public static void addEvent(CommandSender sender, EventType type) {
+        if (type != EventType.CUSTOM) {
+            event_queue.add(new TagEvent(sender, type.getMessage()));
+
+            addPage("【イベント】" + "\n" +
+                    type.getMessage());
+            type.getEventInterface().addEvent();
+        }
+    }
+
     public static void addCustomEvent(CommandSender sender, String message) {
         event_queue.add(new TagEvent(sender, message));
 
+        addPage("【イベント】" + "\n" +
+                message);
+        ChatUtil.sendGlobalMessage("イベントが発動されました。本をご覧ください。");
+    }
+
+    private static void addPage(String message) {
         for (Player online : Bukkit.getOnlinePlayers()) {
             PlayerInventory online_inv = online.getInventory();
             if (!online_inv.contains(Material.WRITTEN_BOOK)) {
@@ -39,15 +55,12 @@ public class EventManager {
                         BookMeta book_meta = (BookMeta) content.getItemMeta();
                         book_meta.setAuthor("運営");
                         book_meta.setTitle("イベントブック");
-                        book_meta.addPage(
-                                "【イベント】" + "\n" +
-                                        message);
+                        book_meta.addPage(message);
                         content.setItemMeta(book_meta);
                     }
                 }
             }
         }
-        ChatUtil.sendGlobalMessage("イベントが発動されました。本をご覧ください。");
     }
 
     public static LinkedList<TagEvent> getEventList() {
@@ -62,6 +75,29 @@ public class EventManager {
         itemstack.setItemMeta(meta);
         
         return itemstack;
+    }
+
+    public enum EventType {
+        PLAYER_NO_STOP_EVENT(
+                "10秒動いていないと鬼に場所が通知されるミッションが発表された。",
+                new PlayerNoStopEvent()),
+        CUSTOM(null, null);
+
+        private final String message;
+        private final EventInterface eventInterface;
+
+        EventType(String message, EventInterface event) {
+            this.message = message;
+            this.eventInterface = event;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public EventInterface getEventInterface() {
+            return eventInterface;
+        }
     }
 
     public static class TagEvent {
@@ -96,5 +132,11 @@ public class EventManager {
         public String getMessage() {
             return message;
         }
+    }
+
+    public interface EventInterface {
+        void addEvent();
+        void stopEvent();
+        EventType getType();
     }
 }

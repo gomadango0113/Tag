@@ -7,6 +7,7 @@ import org.gomadango0113.tag.command.GameStartCommand;
 import org.gomadango0113.tag.listener.PlayerDamageListener;
 import org.gomadango0113.tag.listener.PlayerInteractListener;
 import org.gomadango0113.tag.manager.ScoreboardManager;
+import org.gomadango0113.tag.manager.event.PlayerNoStopEvent;
 
 public final class TagPlugin extends JavaPlugin {
 
@@ -34,6 +35,9 @@ public final class TagPlugin extends JavaPlugin {
 
         plm.registerEvents(new PlayerDamageListener(), this);
         plm.registerEvents(new PlayerInteractListener(), this);
+
+        //Tagイベント
+        plm.registerEvents(new PlayerNoStopEvent(), this);
     }
 
     public static TagPlugin getInstance() {

@@ -3,8 +3,7 @@ package org.gomadango0113.tag.command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.inventory.meta.BookMeta;
-import org.gomadango0113.tag.manager.EventManager;
+import org.gomadango0113.tag.manager.event.EventManager;
 import org.gomadango0113.tag.util.ChatUtil;
 
 public class EventCommand implements CommandExecutor {
@@ -19,6 +18,9 @@ public class EventCommand implements CommandExecutor {
                 else {
                     EventManager.addCustomEvent(send, args[1]);
                 }
+            }
+            else {
+                EventManager.addEvent(send, EventManager.EventType.valueOf(args[0]));
             }
         }
         return false;
